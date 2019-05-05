@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="add">
+   <h2>天气查查看-{{city}}</h2>
+   <input type="text" v-model='city' @keyup.enter='search' @blur='search' placeholder="请输入城市">
+   <ul>
+       <li v-for='item in weatherlist'>
+{{item.date+item.high+item.low+item.type}}
+       </li>
+   </ul>
+    </div>
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/jquery/1.12.2/jquery.min.js"></script>
+<!-- 接口:http://wthrcdn.etouch.cn/weather_mini?city= -->
+<script>
+var app = new Vue({
+    el:'#add',
+    data:{
+        city:'',
+        weatherlist:[],
+    },
+    methods: {
+        search(){
+           console.log(this);
+            
+           $.ajax({
+               
+               url: `http://wthrcdn.etouch.cn/weather_mini?city=${this.city}`,
+              
+                dataType:"json",
+               success:  (data)=> {
+                //   console.log(data);
+                this.weatherlist = data.data.forecast
+               }
+           });
+        }
+    },
+ 
+});
+console.log(app.city);
+    
+</script>

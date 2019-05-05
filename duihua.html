@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+p{
+    border:1px solid pink;
+    font-size: 50px;
+}
+p img{
+    width: 50px;
+  
+
+
+}
+p.isBooy{
+  border: 1px solid black
+}
+</style>
+<body>
+    <div id="add">
+       <p v-for='item in messageList' :class='{isBooy:item.ismale}'>
+           <img :src="item.ismale?'./img/1.jpg':'./img/2.jpg'" alt="">{{item.info}}
+       </p>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+let app = new Vue({
+    el:'#add',
+    data: {
+      messageList:[
+          {
+              ismale:true,
+              info:'在吗'
+          },
+          {
+              ismale:false,
+              info:'不在'
+          },
+          {
+              ismale:true,
+              info:'哦'
+          },
+          {
+              ismale:false,
+              info:'有事吗'
+          },
+      ]
+     
+    }
+})
+</script>
